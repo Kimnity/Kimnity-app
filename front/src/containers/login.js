@@ -131,7 +131,7 @@ const styles = {
   container: {
     backgroundColor: Colors.grayLight,
     bottom: 0,
-    padding: 40,
+    padding: 28,
     flex: 1,
     left: 0,
     position: 'absolute',
@@ -156,8 +156,9 @@ const styles = {
   },
 
   label: {
+    color: Colors.black,
     fontSize: 12,
-    marginBottom: 9
+    marginBottom: 8
   },
 
   logo: {
@@ -165,9 +166,10 @@ const styles = {
   },
 
   message: {
+    color: Colors.black,
     fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 88
+    marginBottom: 120
   },
 
   passContainer: {

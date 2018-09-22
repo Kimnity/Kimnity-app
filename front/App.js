@@ -10,6 +10,7 @@ import React, {Component} from 'react';
 import {Animated, Platform, StyleSheet, Text, TextInput, View, BVLinearGradient, TouchableOpacity} from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
+import {Navigation} from 'react-native-navigation';
 
 import LoginPage from './src/containers/login';
 
