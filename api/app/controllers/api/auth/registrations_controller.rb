@@ -2,6 +2,9 @@ module Api
   module Auth
 
     class RegistrationsController < DeviseTokenAuth::RegistrationsController
+      def create
+        puts "pepepepep"
+      end
       private
 
       def sign_up_params
