@@ -48,3 +48,7 @@ DeviseTokenAuth.setup do |config|
   # do so by enabling this flag. NOTE: This feature is highly experimental!
   # config.enable_standard_devise_support = false
 end
+
+Devise.setup do |config|
+  config.secret_key = ENV['DEVISE_SECRET_KEY']
+end
