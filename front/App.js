@@ -12,13 +12,19 @@ import {Animated, Platform, StyleSheet, Text, TextInput, View, BVLinearGradient,
 import LinearGradient from 'react-native-linear-gradient';
 import {Navigation} from 'react-native-navigation';
 
-import LoginPage from './src/containers/login';
+import SignUpScreen from './src/containers/SignUp';
+import {registerScreens} from './src/containers'
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+ registerScreens();
+
+ Navigation.events().registerAppLaunchedListener(() => {
+  Navigation.setRoot({
+    root: {
+      component: {
+        name: 'Initializing'
+      }
+    },
+  });
 });
 
 type Props = {};
@@ -27,7 +33,7 @@ export default class App extends Component<Props> {
   constructor() {
     super();
     this.state = {
-      login: {
+      signUp: {
         id: null,
         pass: null
       }
@@ -35,24 +41,24 @@ export default class App extends Component<Props> {
   }
 
   setId(text) {
-    this.setState({login: {
+    this.setState({signUp: {
       id: text,
-      pass: this.state.login.pass
+      pass: this.state.signUp.pass
     }})
   }
 
   setPass(text) {
-    this.setState({login: {
+    this.setState({signUp: {
       pass: text,
-      id: this.state.login.id
+      id: this.state.signUp.id
     }})
   }
 
   render() {
     return(
       <View style={{height: '100%', flex: 1}}>
-        <LoginPage
-          state={this.state.login}
+        <SignUpScreen
+          state={this.state.signUp}
           setId={this.setId.bind(this)}
           setPass={this.setPass.bind(this)}
         />

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Animated, Platform, StyleSheet, Text, TextInput, View, BVLinearGradient, TouchableOpacity} from 'react-native';
+import {Animated, Button, Platform, StyleSheet, Text, TextInput, View, BVLinearGradient, TouchableOpacity} from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -7,7 +7,7 @@ import Colors from '../const/colors'
 
 
 
-export default class App extends Component<Props> {
+export default class SignUp extends Component<Props> {
 
 
   constructor() {
@@ -95,7 +95,7 @@ export default class App extends Component<Props> {
           </Animated.View>
         </View>
 
-        <TouchableOpacity style={styles.registerButton}>    
+        <TouchableOpacity style={styles.registerButton}>
           <LinearGradient 
             style={styles.button}
             colors={Colors.theme} 
