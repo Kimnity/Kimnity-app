@@ -1,6 +1,7 @@
 export default {
-  theme: ['#f6d365', '#fda085'],
+  theme: ['#F4B622', '#F4B622'],
   gray: '#dedede',
   grayLight: '#fafafa',
-  white: '#fff'
+  white: '#fff',
+  black: '#3d4555'
 }
