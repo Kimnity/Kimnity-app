@@ -7,7 +7,7 @@ Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
     root: {
       component: {
-        name: 'SignUp'
+        name: 'Initializing'
       }
     },
   });
