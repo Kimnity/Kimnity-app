@@ -1,5 +1,7 @@
 import { Navigation } from 'react-native-navigation';
 
+console.log(6789)
+
 export const goToAuth = () => Navigation.setRoot({
   root: {
     bottomTabs: {

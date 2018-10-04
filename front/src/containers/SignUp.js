@@ -11,10 +11,15 @@ export default class SignUp extends Component<Props> {
 
 
   constructor() {
+    console.log('ahsdifkjh')
     super();
     this.state = {
       mailWidth: new Animated.Value(0),
-      passWidth: new Animated.Value(0)
+      passWidth: new Animated.Value(0),
+      signUp: {
+        id: null,
+        pass: null
+      }
     }
   }
 
@@ -33,6 +38,20 @@ export default class SignUp extends Component<Props> {
       width,
       {toValue: 0, duration: 200}
     ).start()
+  }
+
+  setId(text) {
+    this.setState({signUp: {
+      id: text,
+      pass: this.state.signUp.pass
+    }})
+  }
+
+  setPass(text) {
+    this.setState({signUp: {
+      pass: text,
+      id: this.state.signUp.id
+    }})
   }
 
   render() {
@@ -59,8 +78,8 @@ export default class SignUp extends Component<Props> {
             placeholder="kimoka@kimnity.com"
             onFocus={() => this.onFocus('mail')}
             onBlur={() => this.onBlur('mail')}
-            onChangeText={(text) =>  this.props.setId(text)}
-            value={this.props.state.id}
+            onChangeText={(text) =>  this.setId(text)}
+            value={this.state.signUp.id}
           />
           <Animated.View
             style={{width: mailWidth}}>
@@ -81,8 +100,8 @@ export default class SignUp extends Component<Props> {
             secureTextEntry={true}
             onFocus={() => this.onFocus('pass')}
             onBlur={() => this.onBlur('pass')}
-            onChangeText={(text) =>  this.props.setPass(text)}
-            value={this.props.state.pass}
+            onChangeText={(text) =>  this.setPass(text)}
+            value={this.state.signUp.pass}
           />
           <Animated.View
             style={{width: passWidth}}>

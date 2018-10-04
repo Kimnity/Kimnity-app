@@ -5278,8 +5278,8 @@ react-native-linear-gradient@^2.4.2:
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.4.2.tgz#9d3acd0a198b9d4566e8f6253ef1f60fef0ff2be"
 
 react-native-navigation@alpha:
-  version "2.0.2556"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.0.2556.tgz#7aa832d1c6b79b0b8e605656bacbb979d4605bb1"
+  version "2.0.2573"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.0.2573.tgz#7925c6a463915f2be2aac7f4f3dace6c5feeb760"
   dependencies:
     hoist-non-react-statics "3.x.x"
     lodash "4.x.x"

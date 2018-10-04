@@ -27,6 +27,7 @@ export default class Initialising extends React.Component {
   }
 
   render() {
+    console.log('render')
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Loading</Text>
