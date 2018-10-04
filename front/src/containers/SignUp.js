@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Animated, Platform, StyleSheet, Text, TextInput, View, BVLinearGradient, TouchableOpacity} from 'react-native';
+import {Animated, Button, Platform, StyleSheet, Text, TextInput, View, BVLinearGradient, TouchableOpacity} from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -7,14 +7,18 @@ import Colors from '../const/colors'
 
 
 
-export default class App extends Component<Props> {
+export default class SignUp extends Component<Props> {
 
 
   constructor() {
     super();
     this.state = {
       mailWidth: new Animated.Value(0),
-      passWidth: new Animated.Value(0)
+      passWidth: new Animated.Value(0),
+      signUp: {
+        id: null,
+        pass: null
+      }
     }
   }
 
@@ -33,6 +37,20 @@ export default class App extends Component<Props> {
       width,
       {toValue: 0, duration: 200}
     ).start()
+  }
+
+  setId(text) {
+    this.setState({signUp: {
+      id: text,
+      pass: this.state.signUp.pass
+    }})
+  }
+
+  setPass(text) {
+    this.setState({signUp: {
+      pass: text,
+      id: this.state.signUp.id
+    }})
   }
 
   render() {
@@ -59,8 +77,8 @@ export default class App extends Component<Props> {
             placeholder="kimoka@kimnity.com"
             onFocus={() => this.onFocus('mail')}
             onBlur={() => this.onBlur('mail')}
-            onChangeText={(text) =>  this.props.setId(text)}
-            value={this.props.state.id}
+            onChangeText={(text) =>  this.setId(text)}
+            value={this.state.signUp.id}
           />
           <Animated.View
             style={{width: mailWidth}}>
@@ -81,8 +99,8 @@ export default class App extends Component<Props> {
             secureTextEntry={true}
             onFocus={() => this.onFocus('pass')}
             onBlur={() => this.onBlur('pass')}
-            onChangeText={(text) =>  this.props.setPass(text)}
-            value={this.props.state.pass}
+            onChangeText={(text) =>  this.setPass(text)}
+            value={this.state.signUp.pass}
           />
           <Animated.View
             style={{width: passWidth}}>
@@ -95,7 +113,7 @@ export default class App extends Component<Props> {
           </Animated.View>
         </View>
 
-        <TouchableOpacity style={styles.registerButton}>    
+        <TouchableOpacity style={styles.registerButton}>
           <LinearGradient 
             style={styles.button}
             colors={Colors.theme} 
@@ -131,7 +149,7 @@ const styles = {
   container: {
     backgroundColor: Colors.grayLight,
     bottom: 0,
-    padding: 40,
+    padding: 28,
     flex: 1,
     left: 0,
     position: 'absolute',
@@ -156,8 +174,9 @@ const styles = {
   },
 
   label: {
+    color: Colors.black,
     fontSize: 12,
-    marginBottom: 9
+    marginBottom: 8
   },
 
   logo: {
@@ -165,9 +184,10 @@ const styles = {
   },
 
   message: {
+    color: Colors.black,
     fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 88
+    marginBottom: 120
   },
 
   passContainer: {
