@@ -11,7 +11,6 @@ export default class SignUp extends Component<Props> {
 
 
   constructor() {
-    console.log('ahsdifkjh')
     super();
     this.state = {
       mailWidth: new Animated.Value(0),
