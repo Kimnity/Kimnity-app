@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import {Animated, Button, Platform, StyleSheet, Text, TextInput, View, BVLinearGradient, TouchableOpacity} from 'react-native';
+import {Navigation} from 'react-native-navigation';
+
+
+import axios from 'axios';
 
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -20,6 +24,29 @@ export default class SignUp extends Component<Props> {
         pass: null
       }
     }
+  }
+
+  signUp() {
+    console.log(45678)
+    axios.post('https://api-kimnity.herokuapp.com/api/auth',
+      {
+        email: this.state.signUp.id,
+        password: this.state.signUp.pass
+      })
+      .then(response => {
+        console.log(response, 3456789);
+        if (response.status === "success") {
+          // dispatch(receiveLoginSuccess(response.data));
+          console.log('success')
+        } else {
+          console.log('failed')
+          // dispatch(receiveLoginFailed());
+        }
+      })
+      .catch(e => {
+        console.log('error')
+        // dispatch(receiveLoginFailed());
+      });
   }
 
   onFocus(type) {
@@ -113,7 +140,7 @@ export default class SignUp extends Component<Props> {
           </Animated.View>
         </View>
 
-        <TouchableOpacity style={styles.registerButton}>
+        <TouchableOpacity style={styles.registerButton} onPress={this.signUp.bind(this)}>
           <LinearGradient 
             style={styles.button}
             colors={Colors.theme} 
@@ -123,7 +150,13 @@ export default class SignUp extends Component<Props> {
           </LinearGradient>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.twitterButton}>    
+        <TouchableOpacity style={styles.twitterButton} onPress={() => {
+            Navigation.push(this.props.componentId, {
+              component: {
+                name: 'Home',
+              }
+            });
+          }}>
           <Text style={styles.buttonText}>Twitterで登録</Text>
         </TouchableOpacity>
 
