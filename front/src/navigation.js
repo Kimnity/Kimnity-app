@@ -2,8 +2,14 @@ import { Navigation } from 'react-native-navigation';
 
 export const goToAuth = () => Navigation.setRoot({
   root: {
-    component: {
-      name: 'SignUp'
+    stack: {
+      children: [
+        {
+          component: {
+            name: 'SignUp',
+          }
+        }
+    ],
     }
   }
 });

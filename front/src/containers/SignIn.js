@@ -11,14 +11,14 @@ import Colors from '../const/colors'
 
 
 
-export default class SignUp extends Component<Props> {
+export default class SignIn extends Component<Props> {
 
   constructor() {
     super();
     this.state = {
       mailWidth: new Animated.Value(0),
       passWidth: new Animated.Value(0),
-      signUp: {
+      signIn: {
         id: null,
         pass: null
       }
@@ -28,19 +28,20 @@ export default class SignUp extends Component<Props> {
   static get options() {
     return {
       topBar: {
-        visible: false,
-        drawBehind: true,
-        animate: false,
+        visible: true,
+        title: {
+          text: 'サインイン'
+        },
       }
     };
   }
 
-  signUp() {
-    console.log(this.state.signUp.id, this.state.signUp.pass)
+  signIn() {
+    console.log(this.state.signIn.id, this.state.signIn.pass)
     axios.post('https://api-kimnity.herokuapp.com/api/auth',
       {
-        email: this.state.signUp.id,
-        password: this.state.signUp.pass
+        email: this.state.signIn.id,
+        password: this.state.signIn.pass
       })
       .then(response => {
         console.log(response, 3456789);
@@ -71,16 +72,16 @@ export default class SignUp extends Component<Props> {
   }
 
   setId(text) {
-    this.setState({signUp: {
+    this.setState({signIn: {
       id: text,
-      pass: this.state.signUp.pass
+      pass: this.state.signIn.pass
     }})
   }
 
   setPass(text) {
-    this.setState({signUp: {
+    this.setState({signIn: {
       pass: text,
-      id: this.state.signUp.id
+      id: this.state.signIn.id
     }})
   }
 
@@ -99,8 +100,6 @@ export default class SignUp extends Component<Props> {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.logo}>ロゴ</Text>
-        <Text style={styles.message}>Welcome to Kimnity!</Text>
         <View style={styles.inputContainer}>
           <Text style={styles.label}>メールアドレス</Text>
           <TextInput
@@ -109,7 +108,7 @@ export default class SignUp extends Component<Props> {
             onFocus={() => this.onFocus('mail')}
             onBlur={() => this.onBlur('mail')}
             onChangeText={(text) =>  this.setId(text)}
-            value={this.state.signUp.id}
+            value={this.state.signIn.id}
             autoCapitalize="none"
           />
           <Animated.View
@@ -132,7 +131,7 @@ export default class SignUp extends Component<Props> {
             onFocus={() => this.onFocus('pass')}
             onBlur={() => this.onBlur('pass')}
             onChangeText={(text) =>  this.setPass(text)}
-            value={this.state.signUp.pass}
+            value={this.state.signIn.pass}
             autoCapitalize="none"
           />
           <Animated.View
@@ -146,13 +145,13 @@ export default class SignUp extends Component<Props> {
           </Animated.View>
         </View>
 
-        <TouchableOpacity style={styles.registerButton} onPress={this.signUp.bind(this)}>
+        <TouchableOpacity style={styles.registerButton} onPress={this.signIn.bind(this)}>
           <LinearGradient 
             style={styles.button}
             colors={Colors.theme} 
             start={{x: 1, y: 1}}
             end={{x: 0.0, y: 1}}>
-            <Text style={styles.buttonText}>メールアドレスで登録</Text>
+            <Text style={styles.buttonText}>メールアドレスでログイン</Text>
           </LinearGradient>
         </TouchableOpacity>
 
@@ -164,15 +163,8 @@ export default class SignUp extends Component<Props> {
             //   }
             // });
           }}>
-          <Text style={styles.buttonText}>Twitterで登録</Text>
+          <Text style={styles.buttonText}>Twitterでログイン</Text>
         </TouchableOpacity>
-        <Text style={styles.linkText} onPress={() => {
-          Navigation.push(this.props.componentId, {
-            component: {
-              name: 'SignIn'
-            }
-          })
-        }}>すでにアカウントを持っている</Text>
         <Text style={styles.linkText}>パスワードを忘れた</Text>
       </View>
     );
@@ -223,17 +215,6 @@ const styles = {
     color: Colors.black,
     fontSize: 12,
     marginBottom: 8
-  },
-
-  logo: {
-    marginBottom: 70
-  },
-
-  message: {
-    color: Colors.black,
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginBottom: 100
   },
 
   passContainer: {
