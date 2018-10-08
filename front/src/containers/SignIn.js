@@ -38,19 +38,18 @@ export default class SignIn extends Component<Props> {
 
   signIn() {
     console.log(this.state.signIn.id, this.state.signIn.pass)
-    axios.post('https://api-kimnity.herokuapp.com/api/auth',
+    axios.post('https://api-kimnity.herokuapp.com/api/auth/sign_in',
       {
         email: this.state.signIn.id,
         password: this.state.signIn.pass
       })
       .then(response => {
         console.log(response, 3456789);
-        // dispatch(receiveLoginSuccess(response.data));
         console.log('success')
+        goHome()
       })
       .catch(e => {
         console.log(e)
-        // dispatch(receiveLoginFailed());
       });
   }
 

@@ -46,6 +46,7 @@ export default class SignUp extends Component<Props> {
         console.log(response, 3456789);
         // dispatch(receiveLoginSuccess(response.data));
         console.log('success')
+        goHome()
       })
       .catch(e => {
         console.log(e)
