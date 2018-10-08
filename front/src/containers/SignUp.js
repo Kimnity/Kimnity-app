@@ -27,7 +27,7 @@ export default class SignUp extends Component<Props> {
   }
 
   signUp() {
-    console.log(45678)
+    console.log(this.state.signUp.id, this.state.signUp.pass)
     axios.post('https://api-kimnity.herokuapp.com/api/auth',
       {
         email: this.state.signUp.id,
@@ -35,16 +35,11 @@ export default class SignUp extends Component<Props> {
       })
       .then(response => {
         console.log(response, 3456789);
-        if (response.status === "success") {
-          // dispatch(receiveLoginSuccess(response.data));
-          console.log('success')
-        } else {
-          console.log('failed')
-          // dispatch(receiveLoginFailed());
-        }
+        // dispatch(receiveLoginSuccess(response.data));
+        console.log('success')
       })
       .catch(e => {
-        console.log('error')
+        console.log(e)
         // dispatch(receiveLoginFailed());
       });
   }
@@ -106,6 +101,7 @@ export default class SignUp extends Component<Props> {
             onBlur={() => this.onBlur('mail')}
             onChangeText={(text) =>  this.setId(text)}
             value={this.state.signUp.id}
+            autoCapitalize="none"
           />
           <Animated.View
             style={{width: mailWidth}}>
@@ -128,6 +124,7 @@ export default class SignUp extends Component<Props> {
             onBlur={() => this.onBlur('pass')}
             onChangeText={(text) =>  this.setPass(text)}
             value={this.state.signUp.pass}
+            autoCapitalize="none"
           />
           <Animated.View
             style={{width: passWidth}}>
