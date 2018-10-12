@@ -13,8 +13,8 @@ import Colors from '../const/colors'
 
 export default class SignUp extends Component<Props> {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       mailWidth: new Animated.Value(0),
       passWidth: new Animated.Value(0),
@@ -45,7 +45,6 @@ export default class SignUp extends Component<Props> {
   }
 
   onFocus(type) {
-    console.log(this.state)
     let width = type === 'mail' ? this.state.mailWidth : this.state.passWidth
     width.setValue(0);
     Animated.timing(
@@ -77,8 +76,6 @@ export default class SignUp extends Component<Props> {
   }
 
   render() {
-
-
     let mailWidth = this.state.mailWidth.interpolate({
       inputRange: [0, 1],
       outputRange: ['0%', '100%']
@@ -128,7 +125,7 @@ export default class SignUp extends Component<Props> {
           </Animated.View>
         </View>
 
-        <TouchableOpacity style={styles.registerButton} onPress={this.signUp.bind(this)}>
+        <TouchableOpacity style={styles.registerButton} onPress={() => this.props.navigation.navigate('SignIn')}>
           <Text style={styles.buttonText}>メールアドレスで登録</Text>
         </TouchableOpacity>
 
