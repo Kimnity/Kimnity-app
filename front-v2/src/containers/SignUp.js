@@ -25,6 +25,13 @@ export default class SignUp extends Component<Props> {
     }
   }
 
+  static navigationOptions = {
+    title: 'サインイン',
+    header: null
+  };
+
+
+
   signUp() {
     console.log(this.state.signUp.id, this.state.signUp.pass)
     axios.post('https://api-kimnity.herokuapp.com/api/auth',
@@ -125,7 +132,7 @@ export default class SignUp extends Component<Props> {
           </Animated.View>
         </View>
 
-        <TouchableOpacity style={styles.registerButton} onPress={() => this.props.navigation.navigate('SignIn')}>
+        <TouchableOpacity style={styles.registerButton} onPress={() => this.props.navigation.push('SignIn')}>
           <Text style={styles.buttonText}>メールアドレスで登録</Text>
         </TouchableOpacity>
 
@@ -139,13 +146,7 @@ export default class SignUp extends Component<Props> {
           }}>
           <Text style={styles.buttonText}>Twitterで登録</Text>
         </TouchableOpacity>
-        <Text style={styles.linkText} onPress={() => {
-          // Navigation.push(this.props.componentId, {
-          //   component: {
-          //     name: 'SignIn'
-          //   }
-          // })
-        }}>すでにアカウントを持っている</Text>
+        <Text style={styles.linkText} onPress={() => this.props.navigation.push('SignIn')}>すでにアカウントを持っている</Text>
         <Text style={styles.linkText}>パスワードを忘れた</Text>
       </View>
     );

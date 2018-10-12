@@ -25,6 +25,10 @@ export default class SignUp extends Component<Props> {
     }
   }
 
+  static navigationOptions = {
+    title: 'サインアップ',
+  };
+
   signUp() {
     console.log(this.state.signUp.id, this.state.signUp.pass)
     axios.post('https://api-kimnity.herokuapp.com/api/auth',
@@ -93,7 +97,6 @@ export default class SignUp extends Component<Props> {
     return (
       <View style={styles.container}>
         <Text style={styles.logo}>ロゴ</Text>
-        <Text style={styles.message}>Welcome to Kimnity!</Text>
         <View style={styles.inputContainer}>
           <Text style={styles.label}>メールアドレス</Text>
           <TextInput
@@ -130,7 +133,7 @@ export default class SignUp extends Component<Props> {
         </View>
 
         <TouchableOpacity style={styles.registerButton} onPress={this.signUp.bind(this)}>
-          <Text style={styles.buttonText}>メールアドレスで登録</Text>
+          <Text style={styles.buttonText}>メールアドレスでサインイン</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.twitterButton} onPress={() => {
@@ -141,15 +144,8 @@ export default class SignUp extends Component<Props> {
             //   }
             // });
           }}>
-          <Text style={styles.buttonText}>Twitterで登録</Text>
+          <Text style={styles.buttonText}>Twitterでサインイン</Text>
         </TouchableOpacity>
-        <Text style={styles.linkText} onPress={() => {
-          // Navigation.push(this.props.componentId, {
-          //   component: {
-          //     name: 'SignIn'
-          //   }
-          // })
-        }}>すでにアカウントを持っている</Text>
         <Text style={styles.linkText}>パスワードを忘れた</Text>
       </View>
     );
@@ -198,13 +194,6 @@ const styles = {
 
   logo: {
     marginBottom: 70
-  },
-
-  message: {
-    color: Colors.black,
-    fontSize: 30,
-    fontWeight: 'bold',
-    marginBottom: 100
   },
 
   passContainer: {
