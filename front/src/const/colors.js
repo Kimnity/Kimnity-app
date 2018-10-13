@@ -1,5 +1,5 @@
 export default {
-  theme: ['#F4B622', '#F4B622'],
+  theme: '#F4B622',
   gray: '#dedede',
   grayLight: '#fafafa',
   white: '#fff',

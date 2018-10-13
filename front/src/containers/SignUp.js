@@ -1,20 +1,12 @@
 import React, {Component} from 'react';
-import {Animated, Button, Platform, StyleSheet, Text, TextInput, View, BVLinearGradient, TouchableOpacity} from 'react-native';
-import {Navigation} from 'react-native-navigation';
-
-import { goToAuth, goHome } from '../navigation'
+import {Animated, Button, Platform, StyleSheet, Text, TextInput, View, TouchableOpacity} from 'react-native';
 import axios from 'axios';
-
-import LinearGradient from 'react-native-linear-gradient';
-
 import Colors from '../const/colors'
-
-
 
 export default class SignUp extends Component<Props> {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       mailWidth: new Animated.Value(0),
       passWidth: new Animated.Value(0),
@@ -25,18 +17,16 @@ export default class SignUp extends Component<Props> {
     }
   }
 
-  static get options() {
-    return {
-      topBar: {
-        visible: false,
-        drawBehind: true,
-        animate: false,
-      }
-    };
-  }
+  static navigationOptions = {
+    title: 'サインイン',
+    header: null
+  };
+
+
 
   signUp() {
     console.log(this.state.signUp.id, this.state.signUp.pass)
+
     axios.post('https://api-kimnity.herokuapp.com/api/auth',
       {
         email: this.state.signUp.id,
@@ -46,7 +36,8 @@ export default class SignUp extends Component<Props> {
         console.log(response, 3456789);
         // dispatch(receiveLoginSuccess(response.data));
         console.log('success')
-        goHome()
+        // goHome()
+        this.props.navigation.navigate('Home')
       })
       .catch(e => {
         console.log(e)
@@ -86,8 +77,6 @@ export default class SignUp extends Component<Props> {
   }
 
   render() {
-
-
     let mailWidth = this.state.mailWidth.interpolate({
       inputRange: [0, 1],
       outputRange: ['0%', '100%']
@@ -115,12 +104,7 @@ export default class SignUp extends Component<Props> {
           />
           <Animated.View
             style={{width: mailWidth}}>
-            <LinearGradient 
-              style={{height: 2}}
-              colors={Colors.theme} 
-              start={{x: 1, y: 1}}
-              end={{x: 0.0, y: 1}}>
-            </LinearGradient>
+            <View style={{height: 2, backgroundColor: Colors.theme}}></View>
           </Animated.View>
         </View>
 
@@ -138,27 +122,16 @@ export default class SignUp extends Component<Props> {
           />
           <Animated.View
             style={{width: passWidth}}>
-            <LinearGradient 
-              style={{height: 2}}
-              colors={Colors.theme} 
-              start={{x: 1, y: 1}}
-              end={{x: 0.0, y: 1}}>
-            </LinearGradient>
+            <View style={{height: 2, backgroundColor: Colors.theme}}></View>
           </Animated.View>
         </View>
 
-        <TouchableOpacity style={styles.registerButton} onPress={this.signUp.bind(this)}>
-          <LinearGradient 
-            style={styles.button}
-            colors={Colors.theme} 
-            start={{x: 1, y: 1}}
-            end={{x: 0.0, y: 1}}>
-            <Text style={styles.buttonText}>メールアドレスで登録</Text>
-          </LinearGradient>
+        <TouchableOpacity style={styles.registerButton} onPress={() => this.signUp()}>
+          <Text style={styles.buttonText}>メールアドレスで登録</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.twitterButton} onPress={() => {
-            goHome();
+            // goHome();
             // Navigation.push(this.props.componentId, {
             //   component: {
             //     name: 'Home',
@@ -167,13 +140,7 @@ export default class SignUp extends Component<Props> {
           }}>
           <Text style={styles.buttonText}>Twitterで登録</Text>
         </TouchableOpacity>
-        <Text style={styles.linkText} onPress={() => {
-          Navigation.push(this.props.componentId, {
-            component: {
-              name: 'SignIn'
-            }
-          })
-        }}>すでにアカウントを持っている</Text>
+        <Text style={styles.linkText} onPress={() => this.props.navigation.navigate('SignIn')}>すでにアカウントを持っている</Text>
         <Text style={styles.linkText}>パスワードを忘れた</Text>
       </View>
     );
@@ -181,12 +148,6 @@ export default class SignUp extends Component<Props> {
 }
 
 const styles = {
-  button: {
-    alignItems: 'center',
-    borderRadius: 4,
-    height: 46,
-    justifyContent: 'center',
-  },
 
   buttonText: {
     color: Colors.white,
@@ -242,6 +203,11 @@ const styles = {
   },
 
   registerButton: {
+    alignItems: 'center',
+    backgroundColor: Colors.theme,
+    borderRadius: 4,
+    height: 46,
+    justifyContent: 'center',
     marginBottom: 20
   },
 
