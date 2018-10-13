@@ -1,15 +1,7 @@
 import React, {Component} from 'react';
 import {Animated, Button, Platform, StyleSheet, Text, TextInput, View, TouchableOpacity} from 'react-native';
-// import {Navigation} from 'react-native-navigation';
-
-// import { goToAuth, goHome } from '../navigation'
 import axios from 'axios';
-
-// import LinearGradient from 'react-native-linear-gradient';
-
 import Colors from '../const/colors'
-
-
 
 export default class SignUp extends Component<Props> {
 
@@ -34,6 +26,7 @@ export default class SignUp extends Component<Props> {
 
   signUp() {
     console.log(this.state.signUp.id, this.state.signUp.pass)
+
     axios.post('https://api-kimnity.herokuapp.com/api/auth',
       {
         email: this.state.signUp.id,
@@ -44,6 +37,7 @@ export default class SignUp extends Component<Props> {
         // dispatch(receiveLoginSuccess(response.data));
         console.log('success')
         // goHome()
+        this.props.navigation.navigate('Home')
       })
       .catch(e => {
         console.log(e)
@@ -132,7 +126,7 @@ export default class SignUp extends Component<Props> {
           </Animated.View>
         </View>
 
-        <TouchableOpacity style={styles.registerButton} onPress={() => this.props.navigation.push('SignIn')}>
+        <TouchableOpacity style={styles.registerButton} onPress={() => this.signUp()}>
           <Text style={styles.buttonText}>メールアドレスで登録</Text>
         </TouchableOpacity>
 
@@ -146,7 +140,7 @@ export default class SignUp extends Component<Props> {
           }}>
           <Text style={styles.buttonText}>Twitterで登録</Text>
         </TouchableOpacity>
-        <Text style={styles.linkText} onPress={() => this.props.navigation.push('SignIn')}>すでにアカウントを持っている</Text>
+        <Text style={styles.linkText} onPress={() => this.props.navigation.navigate('SignIn')}>すでにアカウントを持っている</Text>
         <Text style={styles.linkText}>パスワードを忘れた</Text>
       </View>
     );

@@ -26,12 +26,12 @@ export default class SignUp extends Component<Props> {
   }
 
   static navigationOptions = {
-    title: 'サインアップ',
+    title: 'サインイン',
   };
 
   signUp() {
     console.log(this.state.signUp.id, this.state.signUp.pass)
-    axios.post('https://api-kimnity.herokuapp.com/api/auth',
+    axios.post('https://api-kimnity.herokuapp.com/api/auth/sign_in',
       {
         email: this.state.signUp.id,
         password: this.state.signUp.pass
@@ -40,7 +40,7 @@ export default class SignUp extends Component<Props> {
         console.log(response, 3456789);
         // dispatch(receiveLoginSuccess(response.data));
         console.log('success')
-        // goHome()
+        this.props.navigation.navigate('Home')
       })
       .catch(e => {
         console.log(e)

@@ -6,7 +6,6 @@ import {
   StyleSheet,
   AsyncStorage
 } from 'react-native'
-import {Navigation} from 'react-native-navigation';
 import { USER_KEY } from '../config'
 
 export default class Home extends React.Component {
