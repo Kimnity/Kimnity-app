@@ -1,1 +1,0 @@
-# Kimnity-app
