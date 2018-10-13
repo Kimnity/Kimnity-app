@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Animated, Button, Platform, StyleSheet, Text, TextInput, View, TouchableOpacity} from 'react-native';
+import {Animated, Button, Platform, StyleSheet, Text, TextInput, View, TouchableOpacity, AsyncStorage} from 'react-native';
 // import {Navigation} from 'react-native-navigation';
 
 // import { goToAuth, goHome } from '../navigation'
@@ -29,8 +29,8 @@ export default class SignUp extends Component<Props> {
     title: 'サインイン',
   };
 
-  signUp() {
-    console.log(this.state.signUp.id, this.state.signUp.pass)
+  signUp = async () => {
+    await AsyncStorage.setItem('userToken', 'true');
     axios.post('https://api-kimnity.herokuapp.com/api/auth/sign_in',
       {
         email: this.state.signUp.id,
