@@ -7,23 +7,212 @@ import {
   AsyncStorage,
   ScrollView
 } from 'react-native'
-import { USER_KEY } from '../config'
+
+import TrainingCard from './TrainingCard';
+
+let myPosts = [
+  {
+    createdAt: '2018-07-21',
+    text: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト',
+    trainings: [
+      {
+        type: 'weight',
+        name: 'サイドチェスト',
+        sets: [
+          {
+            weight: 7.8,
+            unit: 'kg',
+            time: 30
+          },
+          {
+            weight: 4.2,
+            unit: 'kg',
+            time: 10
+          },
+          {
+            weight: 10.8,
+            unit: 'kg',
+            time: 40
+          },
+        ]
+      },
+      {
+        type: 'weight',
+        name: 'サイドチェスト',
+        sets: [
+          {
+            weight: 7.8,
+            unit: 'kg',
+            time: 30
+          },
+          {
+            weight: 4.2,
+            unit: 'kg',
+            time: 10
+          },
+          {
+            weight: 10.8,
+            unit: 'kg',
+            time: 40
+          },
+        ]
+      }
+    ]
+  },
+  {
+    createdAt: '2018-07-21',
+    text: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト',
+    trainings: [
+      {
+        type: 'weight',
+        name: 'サイドチェスト',
+        sets: [
+          {
+            weight: 7.8,
+            unit: 'kg',
+            time: 30
+          },
+          {
+            weight: 4.2,
+            unit: 'kg',
+            time: 10
+          },
+          {
+            weight: 10.8,
+            unit: 'kg',
+            time: 40
+          },
+        ]
+      },
+      {
+        type: 'weight',
+        name: 'サイドチェスト',
+        sets: [
+          {
+            weight: 7.8,
+            unit: 'kg',
+            time: 30
+          },
+          {
+            weight: 4.2,
+            unit: 'kg',
+            time: 10
+          },
+          {
+            weight: 10.8,
+            unit: 'kg',
+            time: 40
+          },
+        ]
+      }
+    ]
+  },
+  {
+    createdAt: '2018-07-21',
+    text: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト',
+    trainings: [
+      {
+        type: 'weight',
+        name: 'サイドチェスト',
+        sets: [
+          {
+            weight: 7.8,
+            unit: 'kg',
+            time: 30
+          },
+          {
+            weight: 4.2,
+            unit: 'kg',
+            time: 10
+          },
+          {
+            weight: 10.8,
+            unit: 'kg',
+            time: 40
+          },
+        ]
+      },
+      {
+        type: 'weight',
+        name: 'サイドチェスト',
+        sets: [
+          {
+            weight: 7.8,
+            unit: 'kg',
+            time: 30
+          },
+          {
+            weight: 4.2,
+            unit: 'kg',
+            time: 10
+          },
+          {
+            weight: 10.8,
+            unit: 'kg',
+            time: 40
+          },
+        ]
+      }
+    ]
+  },
+  {
+    createdAt: '2018-07-21',
+    text: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト',
+    trainings: [
+      {
+        type: 'weight',
+        name: 'サイドチェスト',
+        sets: [
+          {
+            weight: 7.8,
+            unit: 'kg',
+            time: 30
+          },
+          {
+            weight: 4.2,
+            unit: 'kg',
+            time: 10
+          },
+          {
+            weight: 10.8,
+            unit: 'kg',
+            time: 40
+          },
+        ]
+      },
+      {
+        type: 'weight',
+        name: 'サイドチェスト',
+        sets: [
+          {
+            weight: 7.8,
+            unit: 'kg',
+            time: 30
+          },
+          {
+            weight: 4.2,
+            unit: 'kg',
+            time: 10
+          },
+          {
+            weight: 10.8,
+            unit: 'kg',
+            time: 40
+          },
+        ]
+      }
+    ]
+  }
+]
 
 export default class Home extends React.Component {
-  static get options() {
-    return {
-      topBar: {
-        title: {
-          text: 'Home'
-        },
-      }
-    };
-  }
 
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Text>Hello from screen.</Text>
+        {myPosts.map((post, key) => {
+          return <TrainingCard post={post} key={key} />
+        })}
       </ScrollView>
     )
   }
@@ -31,6 +220,9 @@ export default class Home extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    paddingRight: 6,
+    paddingLeft: 6,
+    paddingTop: 6
     // flex: 1,
     // justifyContent: 'center',
     // alignItems: 'center'
