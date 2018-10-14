@@ -6,7 +6,6 @@ import {
   StyleSheet,
   AsyncStorage
 } from 'react-native'
-import { USER_KEY } from '../config'
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -24,8 +23,8 @@ export default class Timeline extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center'
   }
 })

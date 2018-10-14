@@ -1,4 +1,13 @@
 import { createStackNavigator, createSwitchNavigator, createBottomTabNavigator, createMaterialTopTabNavigator } from 'react-navigation';
+
+import {
+  View,
+  Text,
+  Button,
+  StyleSheet,
+  AsyncStorage
+} from 'react-native'
+
 import Timeline from './containers/Timeline';
 import Profile from './containers/Profile';
 import SignUp from './containers/SignUp';
@@ -7,6 +16,10 @@ import TlAll from './containers/TlAll';
 import TlFollow from './containers/TlFollow';
 import TlTop from './containers/TlTop';
 import initLoad from './initLoad';
+
+import PostIndex from './components/PostIndex';
+import TrainingData from './components/TrainingData';
+import ProfileHero from './components/ProfileHero';
 
 import Colors from './const/colors';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -25,12 +38,12 @@ const TimelineStack = createMaterialTopTabNavigator(
         title: 'フォロー',
       }
     },
-    TlTop: {
-      screen: TlTop,
-      navigationOptions: {
-        title: 'トップユーザー',
-      }
-    }
+    // TlTop: {
+    //   screen: TlTop,
+    //   navigationOptions: {
+    //     title: 'トップユーザー',
+    //   }
+    // }
   },
   {
     tabBarOptions: {
@@ -66,6 +79,51 @@ const TimelineStack = createMaterialTopTabNavigator(
   }
 )
 
+const ProfileStack = createMaterialTopTabNavigator(
+  {
+    PostIndex: {
+      screen: PostIndex,
+      navigationOptions: {
+        title: '投稿一覧',
+      }
+    },
+    TrainingData: {
+      screen: TrainingData,
+      navigationOptions: {
+        title: 'トレーニングデータ',
+      }
+    }
+  },
+  {
+    tabBarOptions: {
+
+      activeTintColor: Colors.theme,
+      inactiveTintColor: Colors.black,
+
+      labelStyle: {
+        fontSize: 14,
+        fontWeight: 'bold'
+      },
+
+      indicatorStyle: {
+        backgroundColor: Colors.theme,
+        height: 4
+      },
+
+      style: {
+        backgroundColor: Colors.white,
+        height: 50,
+        paddingTop: 6,
+        shadowOpacity: 0.2,
+        shadowRadius: 6,
+        shadowColor: 'black',
+        shadowOffset: { height: 2, width: 0 },
+        marginTop: 158
+      },
+    }
+  }
+)
+
 const AppBottomTab = createBottomTabNavigator(
   {
     Timeline: {
@@ -75,7 +133,7 @@ const AppBottomTab = createBottomTabNavigator(
       }
     },
     Profile: {
-      screen: Profile,
+      screen: ProfileStack,
       navigationOptions: {
         title: 'aaa',
         tabBarLabel: 'プロフィール'
@@ -110,15 +168,13 @@ const AppBottomTab = createBottomTabNavigator(
 
 AppBottomTab.navigationOptions = ({ navigation }) => {
   const { routeName } = navigation.state.routes[navigation.state.index];
-  console.log(routeName,98)
-
 
   let headerTitle;
 
   if(routeName === 'Timeline') {
     headerTitle = 'タイムライン'
   } else if (routeName === 'Profile') {
-    headerTitle = 'プロフィール'
+    headerTitle = ProfileHero
   }
 
   return {

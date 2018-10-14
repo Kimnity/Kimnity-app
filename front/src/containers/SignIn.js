@@ -37,19 +37,14 @@ export default class SignUp extends Component<Props> {
         password: this.state.signUp.pass
       })
       .then(response => {
-        console.log(response, 3456789);
-        // dispatch(receiveLoginSuccess(response.data));
-        console.log('success')
         this.props.navigation.navigate('App')
       })
       .catch(e => {
         console.log(e)
-        // dispatch(receiveLoginFailed());
       });
   }
 
   onFocus(type) {
-    console.log(this.state)
     let width = type === 'mail' ? this.state.mailWidth : this.state.passWidth
     width.setValue(0);
     Animated.timing(
@@ -71,12 +66,9 @@ export default class SignUp extends Component<Props> {
       id: text,
       pass: this.state.signUp.pass
     }})
-    console.log(this.state)
-
   }
 
   setPass(text) {
-    console.log(text)
     this.setState({signUp: {
       pass: text,
       id: this.state.signUp.id
