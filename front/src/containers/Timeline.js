@@ -9,16 +9,6 @@ import {
 import { USER_KEY } from '../config'
 
 export default class Timeline extends React.Component {
-  static get options() {
-    return {
-      bottomBar: {
-        title: {
-          text: 'タイムライン'
-        },
-      }
-    };
-  }
-
   render() {
     return (
       <View style={styles.container}>

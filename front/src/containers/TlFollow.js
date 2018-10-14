@@ -22,7 +22,6 @@ export default class Timeline extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hello from Home screen.</Text>
       </View>
     )
   }

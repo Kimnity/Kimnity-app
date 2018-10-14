@@ -8,6 +8,8 @@ import {
 } from 'react-native'
 import { USER_KEY } from '../config'
 
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 export default class Timeline extends React.Component {
   static get options() {
     return {
@@ -22,7 +24,8 @@ export default class Timeline extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hello from Home screen.</Text>
+        <Text>Hello from screen.</Text>
+        <Icon name="heart" size={30} color="#900" />
       </View>
     )
   }

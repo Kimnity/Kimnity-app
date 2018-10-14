@@ -40,7 +40,7 @@ export default class SignUp extends Component<Props> {
         console.log(response, 3456789);
         // dispatch(receiveLoginSuccess(response.data));
         console.log('success')
-        this.props.navigation.navigate('Home')
+        this.props.navigation.navigate('App')
       })
       .catch(e => {
         console.log(e)
