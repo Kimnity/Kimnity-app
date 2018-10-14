@@ -28,7 +28,7 @@ const TimelineStack = createMaterialTopTabNavigator(
     TlTop: {
       screen: TlTop,
       navigationOptions: {
-        title: 'トップ',
+        title: 'トップユーザー',
       }
     }
   },
@@ -50,17 +50,23 @@ const TimelineStack = createMaterialTopTabNavigator(
 
       style: {
         backgroundColor: Colors.white,
-        paddingTop: 18,
+        height: 50,
+        paddingTop: 6,
         shadowOpacity: 0.2,
         shadowRadius: 6,
         shadowColor: 'black',
         shadowOffset: { height: 2, width: 0 },
       },
     }
+  },
+  {
+    navigationOptions: {
+      headerTitle: 'タイムライン'
+    }
   }
 )
 
-const AppStack = createBottomTabNavigator(
+const AppBottomTab = createBottomTabNavigator(
   {
     Timeline: {
       screen: TimelineStack,
@@ -71,12 +77,16 @@ const AppStack = createBottomTabNavigator(
     Profile: {
       screen: Profile,
       navigationOptions: {
-        title: 'プロフィール'
+        title: 'aaa',
+        tabBarLabel: 'プロフィール'
       }
     }
   },
-   {
+  {
     navigationOptions: ({ navigation }) => ({
+
+      headerTitle: 'fljskad',
+
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
@@ -85,13 +95,9 @@ const AppStack = createBottomTabNavigator(
         } else if (routeName === 'Profile') {
           iconName = 'user';
         }
-
-        // You can return any component that you like here! We usually use an
-        // icon component from react-native-vector-icons
         return <Icon name={iconName} size={30} color={tintColor} />;
       },
     }),
-    // tabBarComponent: TabBarBottom,
     tabBarPosition: 'bottom',
     tabBarOptions: {
       activeTintColor: Colors.theme,
@@ -101,6 +107,37 @@ const AppStack = createBottomTabNavigator(
     swipeEnabled: false,
   }
 );
+
+AppBottomTab.navigationOptions = ({ navigation }) => {
+  const { routeName } = navigation.state.routes[navigation.state.index];
+  console.log(routeName,98)
+
+
+  let headerTitle;
+
+  if(routeName === 'Timeline') {
+    headerTitle = 'タイムライン'
+  } else if (routeName === 'Profile') {
+    headerTitle = 'プロフィール'
+  }
+
+  return {
+    headerTitle,
+  };
+};
+
+const AppStack = createStackNavigator(
+  {
+    App: {
+      screen: AppBottomTab,
+      navigationOptions: {
+        headerStyle: {
+          borderBottomWidth: 0,
+        }
+      },
+    }
+  }
+)
 
 const AuthStack = createStackNavigator(
   {

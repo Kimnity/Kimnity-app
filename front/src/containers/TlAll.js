@@ -11,15 +11,6 @@ import { USER_KEY } from '../config'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class Timeline extends React.Component {
-  static get options() {
-    return {
-      bottomBar: {
-        title: {
-          text: 'タイムライン'
-        },
-      }
-    };
-  }
 
   render() {
     return (
