@@ -60,7 +60,7 @@ export default class TrainingCard extends React.Component {
         {this.props.post.trainings.map((training, i) => {
           return(
             <View style={styles.trainingItem} key={i}>
-              <Text>{training.name}</Text>
+              <Text style={styles.trainingName}>{training.name}</Text>
               <View style={styles.trainingSet}>
                 {training.sets.map((set, i) => {
                   return (
@@ -69,11 +69,13 @@ export default class TrainingCard extends React.Component {
                   )
                 })}
               </View>
-              <Text>{this.state.subTotal[i]}</Text>
+              <Text style={styles.subTotal}>小計：{this.state.subTotal[i]} kin</Text>
             </View>
           )
         })}
-        <Text>合計：{this.state.total}</Text>
+        <Text style={styles.totalUnit}>
+          合計：<Text style={styles.totalNum}>{this.state.total}</Text> kin
+        </Text>
       </View>
     )
   }
@@ -119,18 +121,46 @@ const styles = StyleSheet.create({
   content: {
     color: Colors.black,
     fontSize: 14,
-    lineHeight: 18
+    lineHeight: 18,
+    marginBottom: 30
+  },
+
+  trainingName: {
+    color: Colors.black,
+    fontWeight: 'bold',
+    fontSize: 14,
+    marginBottom: 10
   },
 
   trainingItem: {
-
+    borderBottomWidth: 1,
+    borderColor: Colors.gray,
+    marginBottom: 10,
+    paddingBottom: 10
   },
 
   trainingSet: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
 
   trainingSetItem: {
-    marginRight: 20
+    color: Colors.black,
+    marginRight: 20,
+    marginBottom: 10
+  },
+
+  subTotal: {
+    color: Colors.black,
+  },
+
+  totalUnit: {
+    color: Colors.black,
+    fontSize: 12,
+  },
+
+  totalNum: {
+    fontSize: 16,
+    fontWeight: 'bold',
   }
 })
