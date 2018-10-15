@@ -17,11 +17,12 @@ export default class TrainingCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      total: 0
     }
   }
 
   render() {
+
     return (
       <View style={styles.cardContainer}>
         <View style={styles.postInfo}>
@@ -31,16 +32,21 @@ export default class TrainingCard extends React.Component {
         </View>
         <Text style={styles.content}>{this.props.post.text}</Text>
         {this.props.post.trainings.map((training) => {
+          let subTotal = 0;
           return(
             <View>
               <Text>{training.name}</Text>
               <View>
                 {training.sets.map((set) => {
+                  let setTotal = 0;
+                  setTotal = set.weight * set.time
+                  subTotal += setTotal;
                   return (
                     <Text>{set.weight}{set.unit} × {set.time}</Text>
                   )
                 })}
               </View>
+              <Text>{subTotal}</Text>
             </View>
           )
         })}
