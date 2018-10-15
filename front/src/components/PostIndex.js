@@ -38,17 +38,17 @@ let myPosts = [
       },
       {
         type: 'weight',
-        name: 'サイドチェスト',
+        name: '腹筋',
         sets: [
           {
-            weight: 7.8,
+            weight: 10.8,
             unit: 'kg',
-            time: 30
+            time: 110
           },
           {
             weight: 4.2,
             unit: 'kg',
-            time: 10
+            time: 100
           },
           {
             weight: 10.8,
