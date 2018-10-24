@@ -3,7 +3,20 @@
 | API一覧 |
 | ------ |
 
-|  No.  |  TH  |
-| ----  | ---- |
-|  TD   |  TD  |
-|  TD   |  TD  |
+`base_URL: https://api-kimnity.herokuapp.com/api`
+
+## User
+`GET /auth/sign_up` 新規登録ページ表示  
+`POST /auth/` 新規登録  
+`DELETE /auth/` アカウント削除
+`GET /auth/sign_in`　ログインページ表示  
+`POST /auth/sign_in` ログイン  
+`DELETE /auth/sign_out`　ログアウト  
+`GET /auth/password/edit` パスワード変更画面表示   
+`PUT /auth/password` パスワード変更  
+``
+``
+``
+``
+### SNS
+`GET /auth/twitter` SNS認証画面 Redirect(302)
