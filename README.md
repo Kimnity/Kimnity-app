@@ -21,7 +21,7 @@
 ### SNS
 `GET /auth/twitter` SNS認証画面 Redirect(302)
 
-Headers(必須)
+### Headers(必須パラメータ)
 ```
 access-token →HJYXNBRzqt7qjTlgUjUeNw
 client →rz1kj8VkkDae8byTKzQ7vg
