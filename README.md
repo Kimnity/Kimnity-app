@@ -25,7 +25,6 @@
 ```
 access-token →HJYXNBRzqt7qjTlgUjUeNw
 client →rz1kj8VkkDae8byTKzQ7vg
-content-type →application/json; charset=utf-8
 uid →moai@example.com
 ```
 
