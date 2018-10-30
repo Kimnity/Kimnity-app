@@ -19,7 +19,7 @@
 `PUT /auth/password` パスワード変更  
 
 ### SNS
-`GET /auth/twitter` SNS認証画面 Redirect(302)
+`GET /auth/twitter` SNS認証画面 Redirect(301)
 
 ### Headers(必須パラメータ)
 ```
