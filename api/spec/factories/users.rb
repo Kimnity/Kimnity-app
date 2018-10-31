@@ -11,6 +11,13 @@ FactoryBot.define do
     name                       { Faker::StarWars.character }
     uid                        { mail }
     provider                   { 'email' }
-    # tokens                     { '11111111111kfakfjaoewjisdfjawoeifal' }
+  end
+
+  factory :sns_user,class: User do
+    password                   { pass }
+    password_confirmation      { pass }
+    name                       { Faker::StarWars.character }
+    uid                        { Faker::Number.unique.number }
+    provider                   { 'twitter' }
   end
 end
