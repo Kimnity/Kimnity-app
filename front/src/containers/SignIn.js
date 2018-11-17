@@ -9,9 +9,12 @@ import axios from 'axios';
 
 import Colors from '../const/colors'
 
+import { connect } from 'react-redux';
+import { signIn } from '../actions';
 
 
-export default class signIn extends Component<Props> {
+
+class SignIn extends Component<Props> {
 
   constructor() {
     super();
@@ -19,8 +22,8 @@ export default class signIn extends Component<Props> {
       mailWidth: new Animated.Value(0),
       passWidth: new Animated.Value(0),
       signIn: {
-        id: null,
-        pass: null
+        id: "moro1@gmail.com",
+        pass: "morookamorooka"
       }
     }
   }
@@ -29,19 +32,9 @@ export default class signIn extends Component<Props> {
     title: 'サインイン',
   };
 
-  signIn = async () => {
-    await AsyncStorage.setItem('userToken', 'true');
-    axios.post('https://api-kimnity.herokuapp.com/api/auth/sign_in',
-      {
-        email: this.state.signIn.id,
-        password: this.state.signIn.pass
-      })
-      .then(response => {
-        this.props.navigation.navigate("App");
-      })
-      .catch(e => {
-        console.log(e)
-      });
+  signIn = async () => {    
+    await this.props.signIn({id: this.state.signIn.id, pass: this.state.signIn.pass })
+    this.props.navigation.navigate("UserRegister");
   }
 
   onFocus(type) {
@@ -143,6 +136,15 @@ export default class signIn extends Component<Props> {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    name: state.name,
+    image: state.image
+  }
+}
+
+export default connect(mapStateToProps ,{ signIn })(SignIn);
 
 const styles = {
 

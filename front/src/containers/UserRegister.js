@@ -6,13 +6,17 @@ import {
   Button,
   Stylesheet,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage,
 } from "react-native";
 
 import axios from "axios";
+import { connect } from 'react-redux';
+import { editProfile } from '../actions';
+
 import Colors from "../const/colors";
 
-export default class UserRegister extends React.Component {
+class UserRegister extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,27 +26,8 @@ export default class UserRegister extends React.Component {
   }
 
   register = async () => {
-    axios
-      .put(
-        "https://api-kimnity.herokuapp.com/api/auth",
-        {
-          name: this.state.name
-        },
-        {
-          headers: {
-            "access-token": this.props.navigation.state.params["access-token"],
-            client: this.props.navigation.state.params.client,
-            uid: this.props.navigation.state.params.uid
-          }
-        }
-      )
-      .then(response => {
-        console.log(response)
-        this.props.navigation.navigate("App");
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    await this.props.editProfile({name: this.state.name, image: undefined });
+    this.props.navigation.navigate("App");
   };
 
   onFocus(type) {
@@ -95,6 +80,15 @@ export default class UserRegister extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    name: state.name,
+    image: state.image
+  }
+}
+
+export default connect(mapStateToProps ,{ editProfile })(UserRegister);
 
 const styles = {
   buttonText: {

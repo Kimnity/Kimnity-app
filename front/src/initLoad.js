@@ -19,6 +19,8 @@ export default class initLoad extends React.Component {
       this.props.navigation.navigate("App");
     } else {
       this.props.navigation.navigate("Auth");
+      // ユーザー情報は初回api取得後変更があるまでstate管理
+      // タイムライン等は画面表示ごとにapi
     }
 
   }

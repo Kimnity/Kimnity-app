@@ -17,7 +17,9 @@ import Colors from '../const/colors';
 import header from '../images/header.jpg';
 import Icon from '../images/icon.jpg';
 
-export default class ProfileHero extends React.Component {
+import { connect } from 'react-redux';
+
+class ProfileHero extends React.Component {
   render() {
     console.log(this.props)
     const dimensions = Dimensions.get('window');
@@ -48,6 +50,16 @@ export default class ProfileHero extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    name: state.auth.name,
+    image: state.auth.image,
+    loading: state.auth.loading
+  }
+}
+
+export default connect(mapStateToProps ,{})(ProfileHero);
 
 const styles = StyleSheet.create({
 

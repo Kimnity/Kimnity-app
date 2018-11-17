@@ -10,10 +10,19 @@ import SignUp from './src/containers/SignUp';
 import SignIn from './src/containers/SignIn';
 import { createRootNavigator } from './src/router';
 
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import reducers from './src/reducer';
+
 const Layout = createRootNavigator
 
 export default class App extends React.Component {
   render() {
-    return <Layout />
+    return (
+      <Provider store={createStore(reducers, {}, applyMiddleware(ReduxThunk))}>
+        <Layout />
+      </Provider>
+    )
   }
 }

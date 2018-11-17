@@ -12,8 +12,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 export default class Timeline extends React.Component {
 
   render() {
-    console.log(this.props)
-
     return (
       <View style={styles.container}>
         <Text>Hello from screen.</Text>
