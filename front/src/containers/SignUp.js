@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import {Animated, Button, Platform, StyleSheet, Text, TextInput, View, TouchableOpacity, AsyncStorage} from 'react-native';
 import axios from 'axios';
-import Colors from '../const/colors'
+import Colors from '../const/colors';
 
-export default class SignUp extends Component<Props> {
+import { connect } from 'react-redux';
+import { signUp } from '../actions';
+
+class SignUp extends Component<Props> {
 
   constructor(props) {
     super(props);
@@ -25,24 +28,14 @@ export default class SignUp extends Component<Props> {
 
 
   signUp = async () => {
-    await AsyncStorage.setItem('userToken', 'true');
+    await this.props.signUp({id: this.state.signUp.id, pass: this.state.signUp.pass });
+    this.props.navigation.navigate("UserRegister");
 
-    axios.post('https://api-kimnity.herokuapp.com/api/auth',
-      {
-        email: this.state.signUp.id,
-        password: this.state.signUp.pass
-      })
-      .then(response => {
-        console.log(response, 3456789);
-        // dispatch(receiveLoginSuccess(response.data));
-        console.log('success')
-        // goHome()
-        this.props.navigation.navigate('Home')
-      })
-      .catch(e => {
-        console.log(e)
-        // dispatch(receiveLoginFailed());
-      });
+
+
+    // await AsyncStorage.setItem('userToken', 'true');
+
+    
   }
 
   onFocus(type) {
@@ -146,6 +139,15 @@ export default class SignUp extends Component<Props> {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    name: state.name,
+    image: state.image
+  }
+}
+
+export default connect(mapStateToProps ,{ signUp })(SignUp);
 
 const styles = {
 
