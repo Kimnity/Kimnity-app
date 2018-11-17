@@ -37,7 +37,8 @@ export default class SignUp extends Component<Props> {
         password: this.state.signUp.pass
       })
       .then(response => {
-        this.props.navigation.navigate('App')
+        console.log(response)
+        this.props.navigation.navigate('UserRegister')
       })
       .catch(e => {
         console.log(e)

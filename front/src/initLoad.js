@@ -14,8 +14,8 @@ export default class initLoad extends React.Component {
 
   _bootstrapAsync = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
-    // This will switch to the App screen or Auth screen and this loading
-    // screen will be unmounted and thrown away.
+    console.log(userToken, 6545678)
+    // this.props.navigation.navigate('Auth');
     this.props.navigation.navigate(userToken ? 'App' : 'Auth');
   };
 

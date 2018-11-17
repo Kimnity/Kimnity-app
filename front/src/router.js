@@ -1,43 +1,43 @@
-import { createStackNavigator, createSwitchNavigator, createBottomTabNavigator, createMaterialTopTabNavigator } from 'react-navigation';
-
 import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  AsyncStorage
-} from 'react-native'
+  createStackNavigator,
+  createSwitchNavigator,
+  createBottomTabNavigator,
+  createMaterialTopTabNavigator
+} from "react-navigation";
 
-import Timeline from './containers/Timeline';
-import Profile from './containers/Profile';
-import SignUp from './containers/SignUp';
-import SignIn from './containers/SignIn';
-import TlAll from './containers/TlAll';
-import TlFollow from './containers/TlFollow';
-import TlTop from './containers/TlTop';
-import initLoad from './initLoad';
+import { View, Text, Button, StyleSheet, AsyncStorage } from "react-native";
 
-import PostIndex from './components/PostIndex';
-import TrainingData from './components/TrainingData';
-import ProfileHero from './components/ProfileHero';
+import Timeline from "./containers/Timeline";
+import Profile from "./containers/Profile";
+import SignUp from "./containers/SignUp";
+import SignIn from "./containers/SignIn";
+import TlAll from "./containers/TlAll";
+import TlFollow from "./containers/TlFollow";
+import TlTop from "./containers/TlTop";
+import UserRegister from "./containers/UserRegister";
+import initLoad from "./initLoad";
 
-import Colors from './const/colors';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import React from 'react';
+import PostIndex from "./components/PostIndex";
+import TrainingData from "./components/TrainingData";
+import ProfileHero from "./components/ProfileHero";
+
+import Colors from "./const/colors";
+import Icon from "react-native-vector-icons/FontAwesome";
+import React from "react";
 const TimelineStack = createMaterialTopTabNavigator(
   {
     TlAll: {
       screen: TlAll,
       navigationOptions: {
-        title: '全体',
+        title: "全体"
       }
     },
     TlFollow: {
       screen: TlFollow,
       navigationOptions: {
-        title: 'フォロー',
+        title: "フォロー"
       }
-    },
+    }
     // TlTop: {
     //   screen: TlTop,
     //   navigationOptions: {
@@ -47,13 +47,12 @@ const TimelineStack = createMaterialTopTabNavigator(
   },
   {
     tabBarOptions: {
-
       activeTintColor: Colors.theme,
       inactiveTintColor: Colors.black,
 
       labelStyle: {
         fontSize: 14,
-        fontWeight: 'bold'
+        fontWeight: "bold"
       },
 
       indicatorStyle: {
@@ -67,42 +66,41 @@ const TimelineStack = createMaterialTopTabNavigator(
         paddingTop: 6,
         shadowOpacity: 0.2,
         shadowRadius: 6,
-        shadowColor: 'black',
-        shadowOffset: { height: 2, width: 0 },
-      },
+        shadowColor: "black",
+        shadowOffset: { height: 2, width: 0 }
+      }
     }
   },
   {
     navigationOptions: {
-      headerTitle: 'タイムライン'
+      headerTitle: "タイムライン"
     }
   }
-)
+);
 
 const ProfileStack = createMaterialTopTabNavigator(
   {
     PostIndex: {
       screen: PostIndex,
       navigationOptions: {
-        title: '投稿一覧',
+        title: "投稿一覧"
       }
     },
     TrainingData: {
       screen: TrainingData,
       navigationOptions: {
-        title: 'トレーニングデータ',
+        title: "トレーニングデータ"
       }
     }
   },
   {
     tabBarOptions: {
-
       activeTintColor: Colors.theme,
       inactiveTintColor: Colors.black,
 
       labelStyle: {
         fontSize: 14,
-        fontWeight: 'bold'
+        fontWeight: "bold"
       },
 
       indicatorStyle: {
@@ -116,53 +114,52 @@ const ProfileStack = createMaterialTopTabNavigator(
         paddingTop: 6,
         shadowOpacity: 0.2,
         shadowRadius: 6,
-        shadowColor: 'black',
+        shadowColor: "black",
         shadowOffset: { height: 2, width: 0 },
         marginTop: 158
-      },
+      }
     }
   }
-)
+);
 
 const AppBottomTab = createBottomTabNavigator(
   {
     Timeline: {
       screen: TimelineStack,
       navigationOptions: {
-        title: 'タイムライン',
+        title: "タイムライン"
       }
     },
     Profile: {
       screen: ProfileStack,
       navigationOptions: {
-        title: 'aaa',
-        tabBarLabel: 'プロフィール'
+        title: "aaa",
+        tabBarLabel: "プロフィール"
       }
     }
   },
   {
     navigationOptions: ({ navigation }) => ({
-
-      headerTitle: 'fljskad',
+      headerTitle: "fljskad",
 
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
-        if (routeName === 'Timeline') {
-          iconName = 'list-ul';
-        } else if (routeName === 'Profile') {
-          iconName = 'user';
+        if (routeName === "Timeline") {
+          iconName = "list-ul";
+        } else if (routeName === "Profile") {
+          iconName = "user";
         }
         return <Icon name={iconName} size={30} color={tintColor} />;
-      },
+      }
     }),
-    tabBarPosition: 'bottom',
+    tabBarPosition: "bottom",
     tabBarOptions: {
       activeTintColor: Colors.theme,
-      inactiveTintColor: Colors.grayDark,
+      inactiveTintColor: Colors.grayDark
     },
     animationEnabled: false,
-    swipeEnabled: false,
+    swipeEnabled: false
   }
 );
 
@@ -171,29 +168,27 @@ AppBottomTab.navigationOptions = ({ navigation }) => {
 
   let headerTitle;
 
-  if(routeName === 'Timeline') {
-    headerTitle = 'タイムライン'
-  } else if (routeName === 'Profile') {
-    headerTitle = ProfileHero
+  if (routeName === "Timeline") {
+    headerTitle = "タイムライン";
+  } else if (routeName === "Profile") {
+    headerTitle = ProfileHero;
   }
 
   return {
-    headerTitle,
+    headerTitle
   };
 };
 
-const AppStack = createStackNavigator(
-  {
-    App: {
-      screen: AppBottomTab,
-      navigationOptions: {
-        headerStyle: {
-          borderBottomWidth: 0,
-        }
-      },
+const AppStack = createStackNavigator({
+  App: {
+    screen: AppBottomTab,
+    navigationOptions: {
+      headerStyle: {
+        borderBottomWidth: 0
+      }
     }
   }
-)
+});
 
 const AuthStack = createStackNavigator(
   {
@@ -201,19 +196,18 @@ const AuthStack = createStackNavigator(
     SignIn: SignIn
   },
   {
-    navigationOptions: {
-      
-    }
+    navigationOptions: {}
   }
-  );
+);
 
 export const createRootNavigator = createSwitchNavigator(
   {
     initLoad: initLoad,
+    UserRegister: UserRegister,
     App: AppStack,
     Auth: AuthStack
   },
   {
-    initialRouteName: 'initLoad'
+    initialRouteName: "initLoad"
   }
-)
+);
