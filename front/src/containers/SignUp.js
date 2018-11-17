@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
-import {Animated, Button, Platform, StyleSheet, Text, TextInput, View, BVLinearGradient, TouchableOpacity} from 'react-native';
+import {Animated, Button, Platform, StyleSheet, Text, TextInput, View, TouchableOpacity, AsyncStorage} from 'react-native';
+import axios from 'axios';
+import Colors from '../const/colors';
 
-import LinearGradient from 'react-native-linear-gradient';
+import { connect } from 'react-redux';
+import { signUp } from '../actions';
 
-import Colors from '../const/colors'
+class SignUp extends Component<Props> {
 
-
-
-export default class SignUp extends Component<Props> {
-
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       mailWidth: new Animated.Value(0),
       passWidth: new Animated.Value(0),
@@ -20,6 +18,24 @@ export default class SignUp extends Component<Props> {
         pass: null
       }
     }
+  }
+
+  static navigationOptions = {
+    title: 'サインイン',
+    header: null
+  };
+
+
+
+  signUp = async () => {
+    await this.props.signUp({id: this.state.signUp.id, pass: this.state.signUp.pass });
+    this.props.navigation.navigate("UserRegister");
+
+
+
+    // await AsyncStorage.setItem('userToken', 'true');
+
+    
   }
 
   onFocus(type) {
@@ -54,8 +70,6 @@ export default class SignUp extends Component<Props> {
   }
 
   render() {
-
-
     let mailWidth = this.state.mailWidth.interpolate({
       inputRange: [0, 1],
       outputRange: ['0%', '100%']
@@ -79,15 +93,11 @@ export default class SignUp extends Component<Props> {
             onBlur={() => this.onBlur('mail')}
             onChangeText={(text) =>  this.setId(text)}
             value={this.state.signUp.id}
+            autoCapitalize="none"
           />
           <Animated.View
             style={{width: mailWidth}}>
-            <LinearGradient 
-              style={{height: 2}}
-              colors={Colors.theme} 
-              start={{x: 1, y: 1}}
-              end={{x: 0.0, y: 1}}>
-            </LinearGradient>
+            <View style={{height: 2, backgroundColor: Colors.theme}}></View>
           </Animated.View>
         </View>
 
@@ -101,45 +111,45 @@ export default class SignUp extends Component<Props> {
             onBlur={() => this.onBlur('pass')}
             onChangeText={(text) =>  this.setPass(text)}
             value={this.state.signUp.pass}
+            autoCapitalize="none"
           />
           <Animated.View
             style={{width: passWidth}}>
-            <LinearGradient 
-              style={{height: 2}}
-              colors={Colors.theme} 
-              start={{x: 1, y: 1}}
-              end={{x: 0.0, y: 1}}>
-            </LinearGradient>
+            <View style={{height: 2, backgroundColor: Colors.theme}}></View>
           </Animated.View>
         </View>
 
-        <TouchableOpacity style={styles.registerButton}>
-          <LinearGradient 
-            style={styles.button}
-            colors={Colors.theme} 
-            start={{x: 1, y: 1}}
-            end={{x: 0.0, y: 1}}>
-            <Text style={styles.buttonText}>メールアドレスで登録</Text>
-          </LinearGradient>
+        <TouchableOpacity style={styles.registerButton} onPress={() => this.signUp()}>
+          <Text style={styles.buttonText}>メールアドレスで登録</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.twitterButton}>    
+        <TouchableOpacity style={styles.twitterButton} onPress={() => {
+            // goHome();
+            // Navigation.push(this.props.componentId, {
+            //   component: {
+            //     name: 'Home',
+            //   }
+            // });
+          }}>
           <Text style={styles.buttonText}>Twitterで登録</Text>
         </TouchableOpacity>
-
-
+        <Text style={styles.linkText} onPress={() => this.props.navigation.navigate('SignIn')}>すでにアカウントを持っている</Text>
+        <Text style={styles.linkText}>パスワードを忘れた</Text>
       </View>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    name: state.name,
+    image: state.image
+  }
+}
+
+export default connect(mapStateToProps ,{ signUp })(SignUp);
+
 const styles = {
-  button: {
-    alignItems: 'center',
-    borderRadius: 4,
-    height: 46,
-    justifyContent: 'center',
-  },
 
   buttonText: {
     color: Colors.white,
@@ -187,7 +197,7 @@ const styles = {
     color: Colors.black,
     fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 120
+    marginBottom: 100
   },
 
   passContainer: {
@@ -195,6 +205,11 @@ const styles = {
   },
 
   registerButton: {
+    alignItems: 'center',
+    backgroundColor: Colors.theme,
+    borderRadius: 4,
+    height: 46,
+    justifyContent: 'center',
     marginBottom: 20
   },
 
@@ -203,6 +218,13 @@ const styles = {
     backgroundColor: '#00aced',
     borderRadius: 4,
     height: 46,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginBottom: 20
+  },
+
+  linkText: {
+    fontSize: 14,
+    color: Colors.blue,
+    marginBottom: 20
   }
 }
