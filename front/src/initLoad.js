@@ -14,8 +14,13 @@ export default class initLoad extends React.Component {
 
   _bootstrapAsync = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
-    this.props.navigation.navigate('Auth');
-    // this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+    console.log(userToken)
+    if(userToken) {
+      this.props.navigation.navigate("App");
+    } else {
+      this.props.navigation.navigate("Auth");
+    }
+
   }
 
   render() {

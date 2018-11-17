@@ -11,14 +11,14 @@ import Colors from '../const/colors'
 
 
 
-export default class SignUp extends Component<Props> {
+export default class signIn extends Component<Props> {
 
   constructor() {
     super();
     this.state = {
       mailWidth: new Animated.Value(0),
       passWidth: new Animated.Value(0),
-      signUp: {
+      signIn: {
         id: null,
         pass: null
       }
@@ -29,19 +29,15 @@ export default class SignUp extends Component<Props> {
     title: 'サインイン',
   };
 
-  signUp = async () => {
+  signIn = async () => {
     await AsyncStorage.setItem('userToken', 'true');
     axios.post('https://api-kimnity.herokuapp.com/api/auth/sign_in',
       {
-        email: this.state.signUp.id,
-        password: this.state.signUp.pass
+        email: this.state.signIn.id,
+        password: this.state.signIn.pass
       })
       .then(response => {
-        this.props.navigation.navigate('UserRegister', {
-          'access-token': response.headers['access-token'],
-          client: response.headers.client,
-          uid: response.headers.uid
-        })
+        this.props.navigation.navigate("App");
       })
       .catch(e => {
         console.log(e)
@@ -66,16 +62,16 @@ export default class SignUp extends Component<Props> {
   }
 
   setId(text) {
-    this.setState({signUp: {
+    this.setState({signIn: {
       id: text,
-      pass: this.state.signUp.pass
+      pass: this.state.signIn.pass
     }})
   }
 
   setPass(text) {
-    this.setState({signUp: {
+    this.setState({signIn: {
       pass: text,
-      id: this.state.signUp.id
+      id: this.state.signIn.id
     }})
   }
 
@@ -101,7 +97,7 @@ export default class SignUp extends Component<Props> {
             onFocus={() => this.onFocus('mail')}
             onBlur={() => this.onBlur('mail')}
             onChangeText={(text) =>  this.setId(text)}
-            value={this.state.signUp.id}
+            value={this.state.signIn.id}
             autoCapitalize="none"
           />
           <Animated.View
@@ -119,7 +115,7 @@ export default class SignUp extends Component<Props> {
             onFocus={() => this.onFocus('pass')}
             onBlur={() => this.onBlur('pass')}
             onChangeText={(text) =>  this.setPass(text)}
-            value={this.state.signUp.pass}
+            value={this.state.signIn.pass}
             autoCapitalize="none"
           />
           <Animated.View
@@ -128,7 +124,7 @@ export default class SignUp extends Component<Props> {
           </Animated.View>
         </View>
 
-        <TouchableOpacity style={styles.registerButton} onPress={this.signUp.bind(this)}>
+        <TouchableOpacity style={styles.registerButton} onPress={this.signIn.bind(this)}>
           <Text style={styles.buttonText}>メールアドレスでサインイン</Text>
         </TouchableOpacity>
 

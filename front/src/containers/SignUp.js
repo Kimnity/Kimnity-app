@@ -33,14 +33,10 @@ export default class SignUp extends Component<Props> {
         password: this.state.signUp.pass
       })
       .then(response => {
-        console.log(response, 3456789);
-        // dispatch(receiveLoginSuccess(response.data));
-        console.log('success')
-        this.props.navigation.navigate('Home')
+        this.props.navigation.navigate("App")
       })
       .catch(e => {
         console.log(e)
-        // dispatch(receiveLoginFailed());
       });
   }
 

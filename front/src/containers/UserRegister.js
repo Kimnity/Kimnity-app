@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   View,
   Text,
@@ -7,68 +7,65 @@ import {
   Stylesheet,
   TextInput,
   TouchableOpacity
-} from 'react-native';
+} from "react-native";
 
-import axios from 'axios';
-import Colors from '../const/colors'
+import axios from "axios";
+import Colors from "../const/colors";
 
 export default class UserRegister extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       nameWidth: new Animated.Value(0),
       name: null
-    }
+    };
   }
 
   register = async () => {
-    axios.put('https://api-kimnity.herokuapp.com/api/auth',
-      {
-        name: this.state.name
-      },
-      {
-        headers: {
-          'access-token': this.props.navigation.state.params['access-token'],
-          client: this.props.navigation.state.params.client,
-          uid: this.props.navigation.state.params.uid
+    axios
+      .put(
+        "https://api-kimnity.herokuapp.com/api/auth",
+        {
+          name: this.state.name
+        },
+        {
+          headers: {
+            "access-token": this.props.navigation.state.params["access-token"],
+            client: this.props.navigation.state.params.client,
+            uid: this.props.navigation.state.params.uid
+          }
         }
-      })
+      )
       .then(response => {
-        this.props.navigation.navigate('Home')
+        console.log(response)
+        this.props.navigation.navigate("App");
       })
       .catch(e => {
-        console.log(e)
+        console.log(e);
       });
-  }
+  };
 
   onFocus(type) {
     let width = this.state.nameWidth;
     width.setValue(0);
-    Animated.timing(
-      width,
-      {toValue: 1, duration: 200}
-    ).start()
+    Animated.timing(width, { toValue: 1, duration: 200 }).start();
   }
 
   onBlur(type) {
     let width = this.state.nameWidth;
-    Animated.timing(
-      width,
-      {toValue: 0, duration: 200}
-    ).start()
+    Animated.timing(width, { toValue: 0, duration: 200 }).start();
   }
 
   setName(text) {
     this.setState({
       name: text
-    })
+    });
   }
 
   render() {
     let nameWidth = this.state.nameWidth.interpolate({
       inputRange: [0, 1],
-      outputRange: ['0%', '100%']
+      outputRange: ["0%", "100%"]
     });
 
     return (
@@ -80,29 +77,29 @@ export default class UserRegister extends React.Component {
             placeholder="筋肉 ムキ男"
             onFocus={() => this.onFocus()}
             onBlur={() => this.onBlur()}
-            onChangeText={(text) =>  this.setName(text)}
+            onChangeText={text => this.setName(text)}
             autoCapitalize="none"
             value={this.state.name}
           />
-          <Animated.View
-            style={{width: nameWidth}}>
-            <View style={{height: 2, backgroundColor: Colors.theme}}></View>
+          <Animated.View style={{ width: nameWidth }}>
+            <View style={{ height: 2, backgroundColor: Colors.theme }} />
           </Animated.View>
         </View>
-        <TouchableOpacity style={styles.registerButton} onPress={() => this.register()}>
-          <Text style={styles.buttonText}>メールアドレスで登録</Text>
+        <TouchableOpacity
+          style={styles.registerButton}
+          onPress={() => this.register()}
+        >
+          <Text style={styles.buttonText}>プロフィールを登録</Text>
         </TouchableOpacity>
       </View>
-    )
+    );
   }
 }
 
-
 const styles = {
-
   buttonText: {
     color: Colors.white,
-    fontWeight: 'bold',
+    fontWeight: "bold"
   },
 
   container: {
@@ -111,9 +108,9 @@ const styles = {
     padding: 28,
     flex: 1,
     left: 0,
-    position: 'absolute',
+    position: "absolute",
     right: 0,
-    top: 0,
+    top: 0
   },
 
   input: {
@@ -123,13 +120,13 @@ const styles = {
     marginBottom: -2,
     paddingBottom: 6
   },
-  
+
   inputContainer: {
-    marginBottom: 24,
+    marginBottom: 24
   },
 
   inputGradient: {
-    height: 2,
+    height: 2
   },
 
   label: {
@@ -145,7 +142,7 @@ const styles = {
   message: {
     color: Colors.black,
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 100
   },
 
@@ -154,20 +151,20 @@ const styles = {
   },
 
   registerButton: {
-    alignItems: 'center',
+    alignItems: "center",
     backgroundColor: Colors.theme,
     borderRadius: 4,
     height: 46,
-    justifyContent: 'center',
+    justifyContent: "center",
     marginBottom: 20
   },
 
   twitterButton: {
-    alignItems: 'center',
-    backgroundColor: '#00aced',
+    alignItems: "center",
+    backgroundColor: "#00aced",
     borderRadius: 4,
     height: 46,
-    justifyContent: 'center',
+    justifyContent: "center",
     marginBottom: 20
   },
 
@@ -176,4 +173,4 @@ const styles = {
     color: Colors.blue,
     marginBottom: 20
   }
-}
+};

@@ -19,6 +19,7 @@ import Icon from '../images/icon.jpg';
 
 export default class ProfileHero extends React.Component {
   render() {
+    console.log(this.props)
     const dimensions = Dimensions.get('window');
     // const imageHeight = Math.round(dimensions.width * 10 / 16);
     const imageWidth = dimensions.width;
