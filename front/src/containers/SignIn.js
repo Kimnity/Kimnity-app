@@ -37,8 +37,11 @@ export default class SignUp extends Component<Props> {
         password: this.state.signUp.pass
       })
       .then(response => {
-        console.log(response)
-        this.props.navigation.navigate('UserRegister')
+        this.props.navigation.navigate('UserRegister', {
+          'access-token': response.headers['access-token'],
+          client: response.headers.client,
+          uid: response.headers.uid
+        })
       })
       .catch(e => {
         console.log(e)

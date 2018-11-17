@@ -23,18 +23,18 @@ export default class UserRegister extends React.Component {
   }
 
   register = async () => {
-    console.log(5678)
     axios.put('https://api-kimnity.herokuapp.com/api/auth',
       {
-        headers: {
-          'access-token': '3auL6KaDTANyvzOScOVj3Q',
-          client: 'Lf1ZHN71rv7Jq_8VcQRV_g',
-          uid: 'morooka1@gmail.com'
-        },
         name: this.state.name
+      },
+      {
+        headers: {
+          'access-token': this.props.navigation.state.params['access-token'],
+          client: this.props.navigation.state.params.client,
+          uid: this.props.navigation.state.params.uid
+        }
       })
       .then(response => {
-        console.log(response, 3456789);
         this.props.navigation.navigate('Home')
       })
       .catch(e => {
